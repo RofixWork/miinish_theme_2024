@@ -8,31 +8,36 @@
   .swiper-slide {
     width: auto;
   }
-
 </style>
 <div class="w-[90vw] lg:max-w-5xl mx-auto px-4 py-6">
-  {% render 'feature-block'
+  {%
+    render 'feature-block'
     , {
- title: section.settings.title
+    title: section.settings.title
     ,
- desc: section.settings.description
- } %}
+    desc: section.settings.description
+    }
+  %}
 </div>
-{% assign collection_handle = section.settings.collection.title | handleize | default: 'frontpage' %}
-<div class="swiper mySwiper">
-  <div class="swiper-wrapper">
-    {% for product in collections[collection_handle].products %}
-      <div class="swiper-slide">
-        {% render 'product-item'
-          , { currentProduct: product } %}
-      </div>
-    {% endfor %}
+<div>
+  {% assign collection_handle = section.settings.collection.title | handleize | default: 'frontpage' %}
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {% for product in collections[collection_handle].products %}
+        <div class="swiper-slide">
+          {%
+            render 'product-item'
+            , { currentProduct: product }
+          %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
-</div>
   <div class="swiper-pagination"></div>
+</div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {  
+  document.addEventListener('DOMContentLoaded', function() {
     var swiper = new Swiper(".mySwiper", {
       grabCursor: true,
       centeredSlides: false,
@@ -61,29 +66,29 @@
 </script>
 
 {% schema %}
-  {
-    "name": "All Products",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Title",
-        "default": "Top Picks for Your Pet"
-      }, {
-        "type": "inline_richtext",
-        "id": "description",
-        "label": "Description",
-        "default": "Explore our top pet products! From training tools to toys, these favorites are loved by pets and owners alike. Find the perfect addition to your pet's routine and give them the best!"
-      }, {
-        "type": "collection",
-        "id": "collection",
-        "label": "Pick Collection"
-      }
-    ],
-    "presets": [
-      {
-        "name": "all-products"
-      }
-    ]
-  }
+{
+  "name": "All Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Top Picks for Your Pet"
+    }, {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore our top pet products! From training tools to toys, these favorites are loved by pets and owners alike. Find the perfect addition to your pet's routine and give them the best!"
+    }, {
+      "type": "collection",
+      "id": "collection",
+      "label": "Pick Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "all-products"
+    }
+  ]
+}
 {% endschema %}
