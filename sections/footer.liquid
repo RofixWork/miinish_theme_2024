@@ -1,0 +1,29 @@
+<footer class="footer p-10 bg-base-100 text-base-content">
+  <aside>
+    {% render 'logo-svg'
+      , width: "180px"
+      , mobileWidth: "180px" %}
+    <p class="w-[300px] leading-6 mt-2 text-xs text-gray-600">Welcome to Miinosh, your one-stop shop for premium pet essentials. From grooming to playtime, we've got it all for your furry friends' happiness!</p>
+  </aside>
+  <nav>
+    <h6 class="footer-title text-[#324321]">
+      Help & Information
+    </h6>
+    {% for link in linklists['footer'].links %}
+      <a class="link link-hover text-xs text-gray-600" href="{{link.url}}">{{ link.title }}</a>
+    {% endfor %}
+
+  </nav>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [],
+    "presets": [
+      {
+        "name": "footer"
+      }
+    ]
+  }
+{% endschema %}

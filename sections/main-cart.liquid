@@ -1,0 +1,131 @@
+{% form 'cart'
+  , cart
+  , class: "hh" %}
+
+  <div class="py-[30px] px-4 w-[95vw] lg:max-w-6xl mx-auto">
+    {% if cart.empty? %}
+      <h2 class="text-xl text-center text-red-500 font-bold">Your cart is Empty...</h2>
+    {% else %}
+      {% comment %} desktop {% endcomment %}
+      <div class="overflow-x-auto">
+        <table class="table">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Final Price</th>
+              <th>Increase</th>
+              <th class="transform translate-x-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+              <tr>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle w-12 h-12">
+                        {{ item.image | image_url: width: 5000 | image_tag: class: "w-full h-full" }}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="text-[11px] lg:text-base font-bold">{{ item.title }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ item.price | money }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>
+                  {{ item.final_line_price | money }}
+                </td>
+                <td>
+                  <input
+                    min="1"
+                    type="number"
+                    name="updates[]"
+                    class="input input-bordered input-sm w-[100px] max-w-xs"
+                    value="{{ item.quantity }}">
+                </td>
+                <td>
+                  <a href="{{item.url_to_remove}}" class="btn btn-ghost btn-xs text-gray-500 hover:text-red-500 hover:bg-transparent">Remove</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% comment %} mobile {% endcomment %}
+      {% comment %} <div class="block md:hidden">
+                                                                                                                                        {% for item in cart.items %}
+                                                                                                                                          <div class="py-4 border-b border-gray-300">
+                                                                                                                                            <div class="h-[100px] w-[100px]">
+                                                                                                                                              {{ item.image | image_url: width: 5000 | image_tag: class: "w-full h-full" }}
+                                                                                                                                            </div>
+                                                                                                                                            <div class="space-y-3 text-left mt-4">
+                                                                                                                                              <p class="text-sm">
+                                                                                                                                                <strong>Name:</strong>
+                                                                                                                                                <span>{{ item.title }}</span>
+                                                                                                                                              </p>
+                                                                                                                                              <h5>
+                                                                                                                                                <strong>Quantity:</strong>
+                                                                                                                                                <span>{{ item.quantity }}</span>
+                                                                                                                                              </h5>
+                                                                                                                                              <p>
+                                                                                                                                                <strong>Price:</strong>
+                                                                                                                                                <span>{{ item.price | money }}</span>
+                                                                                                                                              </p>
+                                                                                                                                              <p>
+                                                                                                                                                <strong>Total:</strong>
+                                                                                                                                                <span>{{ item.final_line_price | money }}</span>
+                                                                                                                                              </p>
+                                                                                                                                              <div>
+                                                                                                                                                <input
+                                                                                                                                                  min="1"
+                                                                                                                                                  type="number"
+                                                                                                                                                  name="updates[]"
+                                                                                                                                                  class="input input-bordered input-sm w-[100px] max-w-xs"
+                                                                                                                                                  value="{{ item.quantity }}">
+                                                                                                                                                <a href="{{item.url_to_remove}}" class="btn btn-ghost btn-xs text-red-500 hover:bg-red-200 ">Remove</a>
+                                                                                                                                              </div>
+                                                                                                                                            </div>
+                                                                                                                                          </div>
+                                                                                                                                        {% endfor %}
+                                                                                                      </div> {% endcomment %}
+      <div class="flex flex-col md:flex-row items-center gap-y-3 md:justify-between mt-5">
+        <div class="space-x-2">
+          <input
+            class="btn bg-[#CD8C0A] text-white hover:bg-white hover:text-[#CD8C0A] transition-all uppercase"
+            type="submit"
+            value="Update cart">
+        </div>
+        <div>
+          <h2 class="mb-3 text-2xl md:text-3xl font-bold text-center md:text-left">Total: {{ cart.total_price | money }}</h2>
+          <div>
+            <input
+              class="btn bg-[#A49F67] text-white hover:bg-white hover:text-[#A49F67] transition-all uppercase block mx-auto md:ml-0"
+              type="submit"
+              name="checkout"
+              value="Checkout">
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+
+{% endform %}
+
+{% schema %}
+  {
+    "name": "Main Cart",
+    "settings": [],
+    "presets": [
+      {
+        "name": "main-cart"
+      }
+    ]
+  }
+{% endschema %}

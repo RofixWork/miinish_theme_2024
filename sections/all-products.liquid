@@ -1,0 +1,88 @@
+<style>
+  .swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .swiper-slide {
+    width: auto;
+  }
+
+</style>
+<div class="w-[90vw] lg:max-w-5xl mx-auto px-4 py-6">
+  {% render 'feature-block'
+    , {
+ title: section.settings.title
+    ,
+ desc: section.settings.description
+ } %}
+</div>
+{% assign collection_handle = section.settings.collection.title | handleize | default: 'frontpage' %}
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    {% for product in collections[collection_handle].products %}
+      <div class="swiper-slide">
+        {% render 'product-item'
+          , { currentProduct: product } %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {  
+    var swiper = new Swiper(".mySwiper", {
+      grabCursor: true,
+      centeredSlides: true,
+      spaceBetween: 20, // Gap between slides in pixels
+      loop: true, // Enable looping
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      breakpoints: {
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      1024: {
+        slidesPerView: "auto",
+        spaceBetween: 30,
+      },
+    },
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "All Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Top Picks for Your Pet"
+      }, {
+        "type": "inline_richtext",
+        "id": "description",
+        "label": "Description",
+        "default": "Explore our top pet products! From training tools to toys, these favorites are loved by pets and owners alike. Find the perfect addition to your pet's routine and give them the best!"
+      }, {
+        "type": "collection",
+        "id": "collection",
+        "label": "Pick Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "all-products"
+      }
+    ]
+  }
+{% endschema %}

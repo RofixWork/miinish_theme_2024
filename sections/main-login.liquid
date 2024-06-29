@@ -1,0 +1,104 @@
+{% if customer %}
+  <script>
+    window.location.href = "{{routes.root_url}}"
+  </script>
+{% else %}
+  <div class="py-[30px]">
+    <h2 class="text-4xl font-bold text-center mb-8" id="form-title">Login</h2>
+    <div class="max-w-md mx-auto bg-white p-8 shadow-lg rounded-lg">
+      <div id="login-form">
+        {% form 'customer_login'
+          , return_to: routes.root_url %}
+          <div class="text-red-500 mb-3">
+            {{ form.errors | default_errors }}
+          </div>
+          <div class="mb-4">
+            <label for="CustomerEmail" class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              id="CustomerEmail"
+              name="customer[email]"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required>
+          </div>
+          <div class="mb-4">
+            <label for="CustomerPassword" class="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              id="CustomerPassword"
+              name="customer[password]"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required>
+          </div>
+          <div class="mb-4">
+            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Sign In
+            </button>
+          </div>
+          <div class="text-center">
+            <a href="{{ routes.account_register_url }}" class="text-sm text-indigo-600 hover:text-indigo-900">Create Account</a>
+            <br>
+            <p class="text-sm cursor-pointer hover:underline text-indigo-600 hover:text-indigo-900" id="show_recover_form">Forgot Password?</p>
+          </div>
+        {% endform %}
+      </div>
+      {% comment %} recover form {% endcomment %}
+      <div id="form-recover" class="hidden">
+        {% form 'recover_customer_password' %}
+          <div class="text-red-500 mb-3">
+            {{ form.errors | default_errors }}
+          </div>
+          <div class="mb-4">
+            <label for="CustomerEmailRecover" class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              id="CustomerEmailRecover"
+              name="email"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              required>
+          </div>
+          <div class="mb-4">
+            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Recover Password
+            </button>
+          </div>
+          <div class="text-center">
+            <p class="text-sm cursor-pointer hover:underline text-indigo-600 hover:text-indigo-900" id="show_login_form">Login</p>
+          </div>
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+{% endif %}
+
+<script>
+  const formLogin = document.getElementById("login-form");
+  const formRecover = document.getElementById("form-recover");
+  const btnShowRecoverForm = document.getElementById("show_recover_form");
+  const btnShowLoginForm = document.getElementById("show_login_form");
+  const formTitle = document.getElementById("form-title");
+  btnShowRecoverForm.addEventListener("click", () => {
+    if(formRecover.classList.contains("hidden"))
+    {
+      formRecover.classList.remove("hidden");
+      formLogin.classList.add("hidden");
+      formTitle.textContent = 'Recover Password'
+    }
+  });
+
+  btnShowLoginForm.addEventListener("click", () => {
+    if(formLogin.classList.contains("hidden"))
+    {
+      formLogin.classList.remove("hidden");
+      formRecover.classList.add("hidden");
+      formTitle.textContent = 'Login'
+    }
+  });
+</script>
+{% schema %}
+  {
+    "name": "Main Login",
+    "settings": []
+  }
+{% endschema %}

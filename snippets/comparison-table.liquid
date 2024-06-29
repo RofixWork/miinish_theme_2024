@@ -1,0 +1,37 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center">
+  <div class="h-[400px] border border-gray-200 rounded-md shadow overflow-hidden hidden lg:block">
+    {{ currentProduct.metafields.custom.product_comparison_section_image.value | image_url: width: 5000 | image_tag: class: "w-full h-full object-fit" }}
+  </div>
+  <div>
+    <div class="overflow-x-auto">
+      <table class="table">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th></th>
+            <th class="font-bold text-center text-[11px] lg:text-sm bg-[#324321] text-white">Our Brand</th>
+            <th class="font-bold text-center text-[11px] lg:text-sm text-black">Them</th>
+            <th class="font-bold text-center text-[11px] lg:text-sm text-black">Them</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in currentProduct.metafields.custom.product_comparison_section_info.value %}
+            <tr>
+              <th class="text-xs md:text-sm capitalize text-left md:text-center">{{ item }}</th>
+              <td class="text-center bg-[#324321] ">
+                <i class="fa fa-check-circle text-xl text-white font-bold" aria-hidden="true"></i>
+              </td>
+              <td class="text-center">
+                <i class="fa fa-times-circle text-xl font-bold " aria-hidden="true"></i>
+              </td>
+              <td class="text-center">
+                <i class="fa fa-times-circle text-xl font-bold " aria-hidden="true"></i>
+              </td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

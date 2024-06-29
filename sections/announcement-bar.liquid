@@ -1,0 +1,101 @@
+<style>
+  .announcemet_bar_content .splide button.splide__arrow {
+    display: none;
+  }
+
+</style>
+{% if section.blocks.size != 0 %}
+
+  {% if section.settings.show_bar %}
+    <section class="py-4 lg:py-3 w-full bg-[{{section.settings.bg_color}}] flex justify-center items-center text-center">
+      <div
+        id="splide"
+        class="splide w-[80vw] lg:w-[60%] mx-auto"
+        aria-label="Splide Offers">
+        <div class="splide__track ">
+          <ul class="splide__list text-[{{section.settings.text_color}}]">
+            {% for block in section.blocks %}
+              {% if block.type == 'heading' %}
+                <li class="splide__slide">
+                  <span class="text-base md:text-lg" {{ block.shopify_attributes }}>{{ block.settings.heading_text }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+{% endif %}
+
+{% javascript %}
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var splide = new Splide('#splide', {
+      type: 'loop',
+      perPage: 1,
+      pagination: false, // Disable pagination
+      autoplay: true
+    });
+    splide.mount();
+  });
+{% endjavascript %}
+{% schema %}
+  {
+    "name": "Announcement Bar",
+    "tag": "section",
+    "class": "announcemet_bar_content",
+    "max_blocks": 3,
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "blocks": [
+      {
+        "type": "heading",
+        "name": "Heading",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading_text",
+            "label": "Heading Text"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_bar",
+        "label": "Show Announcement Bar",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_arrows_bar",
+        "label": "Show Arrows Bar",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Customize Appearance"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "#8b4d14"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      }
+    ],
+    "presets": [
+      {
+        "name": "announcement-bar"
+      }
+    ]
+  }
+{% endschema %}

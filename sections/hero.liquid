@@ -1,0 +1,63 @@
+{% liquid
+  if section.settings.image == blank
+    assign image = 'murilo-viviani-FcegfS05w2c-unsplash.jpg' | asset_url
+    else 
+    assign image = section.settings.image | image_url:width:5000
+  endif
+%}
+<style>
+  .hero {
+    background-image: url("{{image}}");
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+</style>
+<div class="hero h-[60vh] lg:h-[80vh] bg-cover bg-center bg-no-repeat bg-blend-overlay">
+  <div class="hero-content text-center py-24">
+    <div class="max-w-3xl md:max-w-xl mx-auto">
+      <h1 class="text-3xl md:text-5xl font-bold text-white mb-4">{{ section.settings.title }}</h1>
+      <p class="text-sm text-white mb-6">{{ section.settings.description }}</p>
+      <a href="{% if section.settings.collection != blank %}collections/{{section.settings.collection}}{% else %}#{% endif %}" class="btn bg-white text-black py-3 px-8 rounded-full shadow-md duration-300 hover:text-white hover:bg-[#A49F67] hover:border-[#A49F67] transition-all">{{ section.settings.btn_text }}</a>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "hero",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image",
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Transform Your Pet's Training"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "description",
+        "label": "Description",
+        "default": "Discover essential training tools and aids that empower your pet's learning journey. From clickers to calming solutions, find what your pet needs to thrive."
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Button Text",
+        "default": "Explore Now"
+      }, {
+        "type": "collection",
+        "id": "collection",
+        "label": "Choose Collection",
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Section"
+      }
+    ]
+  }
+{% endschema %}

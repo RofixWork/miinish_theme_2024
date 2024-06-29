@@ -1,0 +1,23 @@
+<div class="py-[30px] px-4 w-[95vw] lg:max-w-6xl mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    {% for collection in collections %}
+
+      <div class="border shadow border-gray-200 rounded-md">
+        <div class="h-[300px] overflow-hidden">
+          {{ collection.featured_image | image_url: width: 5000 | image_tag: class: "w-full h-full object-cover" }}
+        </div>
+        <div class="p-3 border-t border-gray-200">
+          <a href="{{ collection.url }}" class="block uppercase font-semibold text-xl text-center hover:underline">{{ collection.title }}</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Main Collections",
+    "settings": []
+  }
+{% endschema %}

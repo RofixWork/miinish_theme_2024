@@ -1,0 +1,63 @@
+<div class="pt-[30px]">
+  <h2 class="text-4xl font-bold text-center mb-8">My Account</h2>
+  <div class="max-w-4xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+
+    <!-- Customer Info -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-4">Account Details</h3>
+      <p class="text-gray-700">
+        <strong>Name:</strong>
+        {{ customer.first_name }} {{ customer.last_name }}</p>
+      <p class="text-gray-700">
+        <strong>Email:</strong>
+        {{ customer.email }}</p>
+      <a href="/account/logout" class="mt-4 inline-block text-blue-500 hover:underline">Logout</a>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-4">Recent Orders</h3>
+      {% if customer.orders_count > 0 %}
+        <ul>
+          {% paginate customer.orders by 5 %}
+            {% for order in customer.orders %}
+              <li class="border-b border-gray-200 py-4">
+                <p class="text-gray-700">
+                  <strong>Order Name:</strong>
+                  <span class="text-blue-500 underline">{{ order.name | link_to: order.customer_url }}</span>
+                </p>
+                <p class="text-gray-700">
+                  <strong>Date:</strong>
+                  {{ order.created_at | date: "%B %d, %Y" }}</p>
+                <p class="text-gray-700">
+                  <strong>Total:</strong>
+                  {{ order.total_price | money }}</p>
+                <p class="text-gray-700">
+                  <strong>Payment Status:</strong>
+                  {{ order.financial_status_label | capitalize }}</p>
+                <p class="badge badge-neutral badge-md">
+                  {{ order.fulfillment_status | capitalize }}</p>
+              </li>
+            {% endfor %}
+          {% endpaginate %}
+        </ul>
+      {% else %}
+        <p class="text-gray-700">You have no recent orders.</p>
+      {% endif %}
+    </div>
+
+    <!-- Account Settings -->
+    <div>
+      <h3 class="text-2xl font-semibold mb-4">Account Settings</h3>
+      <a href="{{ routes.account_addresses_url }}" class="block mb-2 text-blue-500 hover:underline">Manage Addresses</a>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Main Account",
+    "settings": []
+  }
+{% endschema %}

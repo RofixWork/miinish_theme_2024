@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "title": "Transform Your Pet's Training",
+        "description": "Discover essential training tools and aids that empower your pet's learning journey. From clickers to calming solutions, find what your pet needs to thrive.",
+        "btn_text": "Explore Now",
+        "collection": ""
+      }
+    },
+    "service-box": {
+      "type": "service-box",
+      "settings": {
+        "support_title": "24\/7 FRIENDLY SUPPORT",
+        "support_description": "Our support team always ready for you to 7 days a week",
+        "return_title": "7 DAYS EASY RETURN",
+        "return_description": "Product any fault within 7 days for an immediately exchange.",
+        "guaranted_title": "QUALITY GUARANTEED",
+        "guaranted_desc": "If your product aren't perfect, return them for a full refund"
+      }
+    },
+    "all-products": {
+      "type": "all-products",
+      "settings": {
+        "title": "Top Picks for Your Pet",
+        "description": "Explore our top pet products! From training tools to toys, these favorites are loved by pets and owners alike. Find the perfect addition to your pet' s routine and give them the best!",
+        "collection": "frontpage"
+      }
+    },
+    "newsletter-signup": {
+      "type": "newsletter-signup",
+      "settings": {
+        "icon": "",
+        "title": "Subscribes!",
+        "desc": "Subscribe our newsletter and get discount 30% off",
+        "btn_text": "sign up",
+        "padding": 60,
+        "btn_bg_color": "#324321",
+        "btn_text_color": "#ffffff",
+        "btn_hover_bg_color": "#ffffff",
+        "btn_hover_text_color": "#324321"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "service-box",
+    "all-products",
+    "newsletter-signup"
+  ]
+}

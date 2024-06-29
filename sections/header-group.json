@@ -1,0 +1,42 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "heading_8nCr86": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Welcome to our store!"
+          }
+        },
+        "heading_AK8ARX": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Free Shipping on all Order!"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8nCr86",
+        "heading_AK8ARX"
+      ],
+      "settings": {
+        "show_bar": true,
+        "show_arrows_bar": true,
+        "bg_color": "#8b4d14",
+        "text_color": "#ffffff"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

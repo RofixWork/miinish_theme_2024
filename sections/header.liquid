@@ -1,0 +1,38 @@
+<div class="navbar shadow px-4 bg-base-100">
+  <div class="navbar-start">
+    {% render "dropdown-mobile-menu" %}
+    <a class="text-lg" href="{{routes.root_url}}">
+      {% render 'logo-svg'
+        , width: "130px"
+        , mobileWidth: "100px" %}
+    </a>
+  </div>
+  <nav class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      {% for link in linklists['main-menu'].links %}
+        <li>
+          <a href="{{link.url}}" class="hover:bg-[#E3D6C5]">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  <div class="navbar-end">
+    <div class="flex gap-x-2 items-center">
+
+      {% render "search-bar" %}
+      {% render "cart" %}
+      {% render 'profile' %}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Navbar",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Navbar"
+      }
+    ]
+  }
+{% endschema %}

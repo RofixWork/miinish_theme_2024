@@ -1,0 +1,26 @@
+<style>
+  .product-radios input[type='radio']:checked + label {
+    background-color: #111827;
+    color: white;
+  }
+</style>
+<div class="flex items-center justify-between md:block">
+  <h3 class="text-lg font-semibold mb-2 flex">{{ option.name }}
+    <span class="block md:hidden">:</span>
+  </h3>
+  <div class="flex items-center gap-x-3 product-radios">
+    {% for value in option.values %}
+      <input
+        hidden
+        type="radio"
+        name="{{option.name}}"
+        {% if value.name == option.selected_value %}
+        checked="true"
+        {% endif %}
+        value="{{value}}"
+        id="{{option.name | handleize}}-{{value.name | handleize}}">
+      <label class="block text-[12px] md:text-sm px-3 md:px-5 py-2 bg-white border border-gray-900 hover:bg-gray-900 hover:text-white transition-colors text-gray-900 font-semibold rounded-full cursor-pointer " for="{{option.name | handleize}}-{{value.name | handleize}}">{{ value }}</label>
+
+    {% endfor %}
+  </div>
+</div>

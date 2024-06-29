@@ -1,0 +1,18 @@
+{% assign current_collection = null %}
+{% if collection %}
+  {% assign current_collection = collection %}
+{% elsif product.collections.size > 0 %}
+  {% assign current_collection = product.collections.first %}
+{% endif %}
+
+<div class="text-[10px] md:text-sm breadcrumbs uppercase mb-3">
+  <ul>
+    <li>
+      <a href="{{ routes.root_url }}">Home</a>
+    </li>
+    <li>
+      <a href="{{ current_collection.url }}">{{ current_collection.title }}</a>
+    </li>
+    <li class="font-semibold">{{ product.title }}</li>
+  </ul>
+</div>

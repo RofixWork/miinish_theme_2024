@@ -1,0 +1,398 @@
+<style>
+
+  .shopify-payment-button__button--unbranded {
+    background-color: rgb(133, 32, 206) !important;
+    width: 500px !important;
+    margin-top: 8px !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .shopify-payment-button__more-options {
+    display: none !important;
+  }
+
+  .thumbnail-carousel_1 .splide__slide.is-active {
+    border: 2px solid #A49F67 !important;
+  }
+
+  @media (max-width: 768px) {
+    .shopify-payment-button__button--unbranded {
+      width: 100% !important;
+    }
+  }
+
+</style>
+<div class="py-[30px] px-4 w-[95vw] lg:max-w-6xl mx-auto">
+  {% render 'breadcrumb' %}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+    <div>
+      <div class="block md:hidden mb-2">
+        <h2 class="text-2xl lg:text-3xl font-bold capitalize">{{ product.title | escape }}</h2>
+        <!-- Start of Judge.me code -->
+        <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>
+          {{ product.metafields.judgeme.badge }}
+        </div>
+      <!-- End of Judge.me code -->
+      </div>
+      <div
+        id="product-carousel"
+        class="shadow-sm border border-gray-200 splide splide_product_image"
+        aria-label="Product Images">
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for image in product.images %}
+              <li class="splide__slide">
+                <img
+                  src="{{ image | img_url: 'large' }}"
+                  alt="{{ image.alt | escape }}"
+                  class="w-full h-full"
+                  id="product_image_{{ forloop.index0 }}">
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div
+        id="thumbnail-carousel"
+        class="splide thumbnail-carousel_1 mt-4"
+        aria-label="Product Thumbnails">
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% for image in product.images %}
+              <li class="splide__slide">
+                <img
+                  src="{{ image | img_url: '100x100' }}"
+                  alt="{{ image.alt | escape }}"
+                  class="w-20 h-20 object-cover">
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="mt-[20px] md:mt-0 flex flex-col">
+      {% form 'product'
+        , product
+        , class: "flex flex-col"
+      %}
+        <input
+          type="text"
+          name="id"
+          hidden
+          id="product-id"
+          value="{{product.selected_or_first_available_variant.id}}">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when "product_title" %}
+              <div class="hidden md:block mb-2">
+                <h2 {{ block.shopify_attributes }} class="md:text-3xl font-bold capitalize">{{ product.title | escape }}</h2>
+                <!-- Start of Judge.me code -->
+                <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}'>
+                  {{ product.metafields.judgeme.badge }}
+                </div>
+              <!-- End of Judge.me code -->
+              </div>
+            {% when "product_short_description" %}
+              <p class="mt-4 md:my-3 text-sm text-gray-400 font-normal order-5 md:order-2">
+                {% if product.metafields.custom.short_product_desc != blank %}
+                  {{ product.metafields.custom.short_product_desc }}
+                {% else %}
+                  {{ product.content | truncate: 200 | strip_html }}
+                {% endif %}
+              </p>
+            {% when "product_price" %}
+              <div {{ block.shopify_attributes }} class="my-2 md:mt-0 order-1 md:order-3">
+                {% render 'product-price' %}
+              </div>
+            {% when "product_divider" %}
+              <div class="divider hidden md:flex md:order-4" {{ block.shopify_attributes }}></div>
+            {% when "product_variants" %}
+              {% if product.variants.size > 1 %}
+                <div
+                  id="product_options"
+                  class="space-y-3 order-2 md:order-5"
+                  {{ block.shopify_attributes }}>
+                  {% for option in product.options_with_values %}
+                    {% if option.name == "Color" %}
+                      {% render 'product-color-variant'
+                        , option: option %}
+                    {% else %}
+                      {% render 'product-every-variant'
+                        , option: option %}
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% when 'btn_add_to_cart' %}
+              <div class="mt-4 order-3 md:order-6" {{ block.shopify_attributes }}>
+                <button
+                  class='btn btn-success text-white rounded-lg w-[100%] lg:w-[500px]'
+                  type="submit"
+                  id="btn_add_cart"
+                  {% if product.selected_or_first_available_variant.available == false %}
+                  disabled
+                  {% endif %}>
+                  {% if product.selected_or_first_available_variant.available %}
+                    Add to cart
+                  {% else %}
+                    Sold Out
+                  {% endif %}
+                </button>
+              </div>
+            {% when "btn_buy" %}
+              <div {{ block.shopify_attributes }} class="order-4 md:order-7 mt-2 space-y-2">{{ form | payment_button }}
+                <div>
+                  <img src="{{ 'payment.avif' | asset_url }}" />
+                </div>
+              </div>
+            {% when "badges" %}
+              <div class="order-6 md:order-8 my-4 md:my-0 md:mt-4">
+                {% render 'badges-for-critical-info' %}
+              </div>
+            {% when "product_faqs" %}
+              {% assign variable = product.metafields.custom.faqs.value %}
+              {% if variable != blank %}
+                <div class="space-y-3 order-7 md:order-9 w-full lg:w-[500px]" {{ block.shopify_attributes }}>
+                  <h3 class="divider text-xl md:text-2xl font-semibold mb-[30px] ">FAQs</h3>
+                  {% for item in variable %}
+                    {% render 'faqs'
+                      , {
+ question: item.question
+                      ,
+ answer: item.answer
+
+ } %}
+                  {% endfor %}
+
+                </div>
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+
+      {% endform %}
+    </div>
+  </div>
+
+  {% comment %} description / FAQ {% endcomment %}
+  <div class="py-[15px] md:pt-[40px] space-y-4">
+    <div>
+      <div role="tablist" class="tabs tabs-lifted">
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          class="tab font-bold"
+          aria-label="Description"
+          checked />
+        <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+          <div class="mt-[30px] space-y-3">
+            {{ product.description }}
+          </div>
+        </div>
+
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          class="tab font-bold"
+          aria-label="Shipping" />
+        <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+          <p>We offer free shipping on all orders over $50. Orders are shipped within 2-3 business days.</p>
+        </div>
+
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          class="tab font-bold"
+          aria-label="Return" />
+        <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+          <p>You can return products within 30 days of purchase. Ensure the product is in its original condition and unused.</p>
+          <p>To initiate a return, please contact our customer service team via email or phone.</p>
+        </div>
+      </div>
+    </div>
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when "product_comparison_table" %}
+          <div {{ block.shopify_attributes }}>
+            {% if product.metafields.custom.product_comparison_section_image.value != blank and product.metafields.custom.product_comparison_section_info.value != blank %}
+              <h3 class="divider text-xl md:text-2xl font-semibold mb-[30px]">Comparison</h3>
+              {% render 'comparison-table'
+                , currentProduct: product %}
+
+            {% endif %}
+          </div>
+      {% else %}
+
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+    var mainCarousel = new Splide('#product-carousel', {
+      type       : 'loop',  // Change the carousel type to 'loop'
+      autoplay   : true,    // Enable autoplay
+      interval   : 5000,    // Set the interval for autoplay (3000ms = 3 seconds)
+      heightRatio: 1,     // Adjust this ratio or use fixed height in CSS
+      pagination : false,
+      arrows     : false,    // Enable arrows
+    }).mount();
+      
+    var thumbnailCarousel = new Splide('#thumbnail-carousel', {
+      fixedWidth  : 100,
+      fixedHeight : 64,
+      isNavigation: true,
+      gap         : 10,
+      focus       : 'center',
+      pagination  : false,
+      cover       : true,
+      breakpoints : {
+        600: {
+          fixedWidth : 66,
+          fixedHeight: 40,
+        },
+      },
+    }).mount();
+    //handle product variants
+    const currentProduct = {{product |  json}};
+    const formattedPrices = {
+            {% for variant in product.variants %}
+                {{ variant.id }}: "{{ variant.price | money }}"{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        };
+        const formattedComparePrices = {
+      {% for variant in product.variants %}
+        {{variant.id}}: "{{variant.compare_at_price | money}}"{%  unless forloop.last %},{% endunless %}
+        {% endfor %}
+    };
+    const radios = document.querySelectorAll("#product_options input[type='radio']");
+    const btnAddToCart = document.getElementById("btn_add_cart");
+    radios.forEach(radio => {
+        radio.addEventListener("change", () => {
+            const selectedValues = [...document.querySelectorAll("#product_options input[type='radio']:checked")].map(radioItem => radioItem.value);
+            const matchedVariant = currentProduct.variants.find(variant => selectedValues.every((value, index) => value === variant.options[index]));
+            if(matchedVariant)
+            {
+                document.getElementById("product-id").value = matchedVariant.id;
+                document.getElementById("product_price").textContent =  formattedPrices[matchedVariant.id] ;
+                const comparePrice = document.getElementById("product_compare_price");
+                const productDiscountPercentage =  document.getElementById("discount_percentage");
+                comparePrice.textContent =  formattedComparePrices[matchedVariant.id] ;
+    
+                if(matchedVariant.available)
+                {
+                  btnAddToCart.textContent = 'Add to Cart';
+                  btnAddToCart.disabled = false;
+                }else
+                {
+                  btnAddToCart.textContent = 'Sold Out';
+                  btnAddToCart.disabled = true;
+                }
+    
+                if(matchedVariant.price >= matchedVariant.compare_at_price )
+                {
+                    comparePrice.classList.add("hidden");
+                    productDiscountPercentage.classList.add("hidden");
+                }
+                else if(matchedVariant.compare_at_price >= matchedVariant.price)
+                {
+                    comparePrice.classList.remove("hidden");
+                    productDiscountPercentage.classList.remove("hidden")
+                    const discountPrice = matchedVariant.compare_at_price - matchedVariant.price;
+                    const discountPercentage = (discountPrice / matchedVariant.compare_at_price) * 100;
+      
+                    productDiscountPercentage.textContent = `-${Math.round(discountPercentage)}%`;
+                }
+      
+                
+                // Update main product image
+                const imageIndex = matchedVariant.featured_image.position - 1;
+                mainCarousel.go(imageIndex);
+        
+                // customize URL
+                const url = new URL(window.location.href);
+                const params = new URLSearchParams();
+                params.append('variant', matchedVariant.id);
+                url.search = params.toString();
+                window.history.replaceState(null, null, url.toString())
+            }
+      
+            
+        })
+    })
+      
+      
+    mainCarousel.sync(thumbnailCarousel).mount();
+      
+      });
+  </script>
+
+
+  {% schema %}
+    {
+      "name": "Main Product",
+      "tag": "section",
+      "class": "product_page",
+      "blocks": [
+        {
+          "type": "product_title",
+          "name": "Title",
+          "limit": 1,
+          "settings": []
+        },
+        {
+          "type": "product_short_description",
+          "name": "Short Description",
+          "limit": 1,
+          "settings": []
+        },
+        {
+          "type": "product_price",
+          "name": "Price",
+          "limit": 1,
+          "settings": []
+        },
+        {
+          "type": "product_divider",
+          "name": "Divider",
+          "settings": []
+        }, {
+          "type": "product_variants",
+          "name": "Product Variants",
+          "limit": 1,
+          "settings": []
+        }, {
+          "type": "btn_add_to_cart",
+          "name": "Add to Cart",
+          "limit": 1,
+          "settings": []
+        }, {
+          "type": "btn_buy",
+          "name": "Buy Now",
+          "limit": 1,
+          "settings": []
+        }, {
+          "type": "badges",
+          "name": "Badges",
+          "limit": 1,
+          "settings": []
+        }, {
+          "type": "product_faqs",
+          "name": "FAQ",
+          "limit": 1,
+          "settings": []
+        }, {
+          "type": "product_comparison_table",
+          "name": "Comparison Table",
+          "limit": 1,
+          "settings": []
+        }
+      ],
+      "settings": []
+    }
+  {% endschema %}

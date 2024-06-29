@@ -1,0 +1,34 @@
+<div class="py-[30px] px-4 w-[95vw] lg:max-w-6xl mx-auto">
+  <div class="search-message">
+    {% assign product_count = search.results_count %}
+    {% if product_count == 1 %}
+      <p class="mb-3 text-base font-semibold uppercase text-orange-600">We found 1 product matching your search criteria. Explore and discover the perfect item for you!</p>
+    {% elsif product_count > 1 %}
+      <p class="mb-3 text-base font-semibold uppercase text-orange-600">We found {{ product_count }} products matching your search criteria. Explore and discover the perfect items for you!</p>
+    {% else %}
+      <p class="mb-3 text-base font-semibold uppercase text-orange-600">No products found matching your search criteria. Please try a different search term.</p>
+    {% endif %}
+  </div>
+  {% if search.results_count != empty %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {% for item in search.results %}
+        {% if item.object_type == 'product' %}
+          {% render 'product-item'
+            ,
+ {
+ currentProduct: item
+            ,
+ autoWidth: true
+ } %}
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  {% endif %}
+</div>
+{% schema %}
+  {
+    "name": "Main Search",
+    "settings": []
+  }
+{% endschema %}

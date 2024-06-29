@@ -1,0 +1,43 @@
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "heading_Dj7Hf6": {
+            "type": "heading",
+            "settings": {
+              "heading_text": "Hello everyone!"
+            }
+          },
+          "heading_kENi4n": {
+            "type": "heading",
+            "settings": {
+              "heading_text": "Welcome to our store!"
+            }
+          },
+          "heading_zhTYYN": {
+            "type": "heading",
+            "settings": {
+              "heading_text": "Hello my website!"
+            }
+          }
+        },
+        "block_order": [
+          "heading_Dj7Hf6",
+          "heading_kENi4n",
+          "heading_zhTYYN"
+        ],
+        "settings": {
+          "show_bar": true,
+          "show_arrows_bar": true,
+          "bg_color": "#333333",
+          "text_color": "#ffffff"
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  }
+}

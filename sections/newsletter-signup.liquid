@@ -1,0 +1,128 @@
+{% liquid
+  if section.settings.image == blank
+    assign image = 'newsletter.jpg' | asset_url
+  else
+    assign image = section.settings.image | image_url: width: 5000
+  endif
+%}
+<style>
+  .newsletter_content {
+    background-image: url("{{image}}");
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+</style>
+<div class="newsletter_content bg-gray-100 py-[{{section.settings.padding}}px] flex items-center bg-cover bg-center bg-no-repeat bg-blend-overlay">
+  <div class="w-[90vw] md:w-[60vw] lg:w-[40vw] mx-auto text-white">
+    <div class="mb-3">
+      <div class="flex justify-center">
+        {% if section.settings.icon != blank %}
+          {{ section.settings.icon }}
+        {% else %}
+          <svg
+            class="bi bi-envelope-open-heart-fill w-[80px] h-[80px] md:w-[100px] md:h-[100px]"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"><path d="M8.941.435a2 2 0 0 0-1.882 0l-6 3.2A2 2 0 0 0 0 5.4v.313l4.222 2.475c.024-.058.05-.114.08-.17.665-1.3 2.362-1.917 3.698-1.25 1.336-.667 3.033-.05 3.699 1.25a3.3 3.3 0 0 1 .08.17L16 5.713V5.4a2 2 0 0 0-1.059-1.765l-6-3.2ZM0 6.873l4 2.344c-.012.542.124 1.117.416 1.694l.004.006L0 13.372v-6.5Zm.059 7.611 4.9-2.723c.563.73 1.383 1.467 2.49 2.198l.551.365.551-.365c1.107-.73 1.927-1.467 2.49-2.198l4.9 2.723A2 2 0 0 1 14 16H2a2 2 0 0 1-1.941-1.516ZM16 13.372l-4.42-2.455.004-.006c.292-.577.428-1.152.415-1.694L16 6.873v6.5Z" /><path d="M8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z" /></svg>
+        {% endif %}
+      </div>
+      {% render 'feature-block'
+        , {
+ title: section.settings.title
+        ,
+ desc: section.settings.desc
+ } %}
+    </div>
+    {% form 'customer' %}
+      <div class="flex gap-2">
+        <input
+          class="flex-1 text-gray-900 w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 ring-gray-900 transition-all"
+          type="email"
+          name="contact[email]"
+          placeholder="Email" />
+        <input
+          type="submit"
+          class="btn bg-[{{section.settings.btn_bg_color}}] text-[{{section.settings.btn_text_color}}] hover:bg-[{{section.settings.btn_hover_bg_color}}] border-[{{section.settings.btn_bg_color}}] hover:border-[{{section.settings.btn_hover_text_color}}] hover:text-[{{section.settings.btn_hover_text_color}}]  transition-all px-4 py-2 cursor-pointer  rounded-md capitalize"
+          value='{{section.settings.btn_text}}' />
+      </div>
+    {% endform %}
+  </div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Newsletter Signup",
+    "settings": [
+      {
+        "type": "html",
+        "id": "icon",
+        "label": "Icon",
+        "info": "Enter your SVG here (100px * 100px)"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Subscribes!"
+      },
+      {
+        "type": "text",
+        "id": "desc",
+        "label": "Description",
+        "default": "Subscribe our newsletter and get discount 30% off"
+      },
+      {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Button Text",
+        "default": "sign up"
+      }, {
+        "type": "header",
+        "content": "Customize Appearance"
+      }, {
+        "type": "range",
+        "id": "padding",
+        "min": 60,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding",
+        "default": 60
+      }, {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Pick Image"
+      }, {
+        "type": "header",
+        "content": "Customize Button Appearence"
+      }, {
+        "type": "color",
+        "id": "btn_bg_color",
+        "label": "Background Color",
+        "default": "#324321"
+      }, {
+        "type": "color",
+        "id": "btn_text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      }, {
+        "type": "color",
+        "id": "btn_hover_bg_color",
+        "label": "Hover Background Color",
+        "default": "#ffffff"
+      }, {
+        "type": "color",
+        "id": "btn_hover_text_color",
+        "label": "Hover Text Color",
+        "default": "#324321"
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "newsletter-signup"
+      }
+    ]
+  }
+{% endschema %}

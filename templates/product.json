@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "main-proudct": {
+      "type": "main-product",
+      "blocks": {
+        "product_title_M6XQXE": {
+          "type": "product_title",
+          "settings": {
+          }
+        },
+        "product_short_description_6nYUVN": {
+          "type": "product_short_description",
+          "settings": {
+          }
+        },
+        "product_price_9NhaaP": {
+          "type": "product_price",
+          "settings": {
+          }
+        },
+        "product_divider_hycKby": {
+          "type": "product_divider",
+          "settings": {
+          }
+        },
+        "product_variants_8gL3dE": {
+          "type": "product_variants",
+          "settings": {
+          }
+        },
+        "btn_add_to_cart_F9xKqi": {
+          "type": "btn_add_to_cart",
+          "settings": {
+          }
+        },
+        "btn_buy_kQtKtz": {
+          "type": "btn_buy",
+          "settings": {
+          }
+        },
+        "badges_mRFyML": {
+          "type": "badges",
+          "settings": {
+          }
+        },
+        "product_faqs_zcyrPq": {
+          "type": "product_faqs",
+          "settings": {
+          }
+        },
+        "product_comparison_table_hEirLf": {
+          "type": "product_comparison_table",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "product_title_M6XQXE",
+        "product_short_description_6nYUVN",
+        "product_price_9NhaaP",
+        "product_divider_hycKby",
+        "product_variants_8gL3dE",
+        "btn_add_to_cart_F9xKqi",
+        "btn_buy_kQtKtz",
+        "badges_mRFyML",
+        "product_faqs_zcyrPq",
+        "product_comparison_table_hEirLf"
+      ],
+      "settings": {
+      }
+    },
+    "1719065939732cf89a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_cWQXVm": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_cWQXVm"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main-proudct",
+    "1719065939732cf89a"
+  ]
+}
