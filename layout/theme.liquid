@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FAVICON -->
+      {% if 'favicon.png' | asset_url %}
+    <link rel="icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
+  {% endif %}
     {{ content_for_header }}
   {{ 'poppins-font.css' | asset_url | stylesheet_tag }}
     {% comment %} splide {% endcomment %}
