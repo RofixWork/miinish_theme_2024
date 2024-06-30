@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "type": "header",
   "name": "Header",
@@ -11,6 +20,12 @@
             "heading_text": "Welcome to our store!"
           }
         },
+        "heading_fkRCJK": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "jjjjjj"
+          }
+        },
         "heading_AK8ARX": {
           "type": "heading",
           "settings": {
@@ -20,6 +35,7 @@
       },
       "block_order": [
         "heading_8nCr86",
+        "heading_fkRCJK",
         "heading_AK8ARX"
       ],
       "settings": {
