@@ -29,7 +29,7 @@
 
 {% endif %}
 
-<script>
+{% javascript %}
 
   document.addEventListener('DOMContentLoaded', function() {
     var splide = new Splide('#splide', {
@@ -37,8 +37,11 @@
       perPage: 1,
       pagination: false, // Disable pagination
       autoplay: true,
+       interval: 3000, 
+    });
+    splide.mount();
   });
-</script>
+{% endjavascript %}
 {% schema %}
   {
     "name": "Announcement Bar",
