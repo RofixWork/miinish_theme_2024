@@ -11,32 +11,18 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "announcement-bar": {
+    "announcement_bar_ThHMDX": {
       "type": "announcement-bar",
       "blocks": {
-        "heading_8nCr86": {
+        "heading_cB8Pnf": {
           "type": "heading",
           "settings": {
-            "heading_text": "Welcome to our store!"
-          }
-        },
-        "heading_fkRCJK": {
-          "type": "heading",
-          "settings": {
-            "heading_text": "jjjjjj"
-          }
-        },
-        "heading_AK8ARX": {
-          "type": "heading",
-          "settings": {
-            "heading_text": "Free Shipping on all Order!"
+            "heading_text": "jklklkl"
           }
         }
       },
       "block_order": [
-        "heading_8nCr86",
-        "heading_fkRCJK",
-        "heading_AK8ARX"
+        "heading_cB8Pnf"
       ],
       "settings": {
         "show_bar": true,
@@ -52,7 +38,7 @@
     }
   },
   "order": [
-    "announcement-bar",
+    "announcement_bar_ThHMDX",
     "header"
   ]
 }
