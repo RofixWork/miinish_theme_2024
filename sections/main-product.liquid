@@ -41,11 +41,11 @@
         <div class="splide__track">
           <ul class="splide__list">
             {% for image in product.images %}
-              <li class="splide__slide">
+              <li class="splide__slide rounded-md overflow-hidden">
                 <img
                   src="{{ image | img_url: 'large' }}"
                   alt="{{ image.alt | escape }}"
-                  class="w-full h-full rounded-md"
+                  class="w-full h-full "
                   id="product_image_{{ forloop.index0 }}">
               </li>
             {% endfor %}
