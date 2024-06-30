@@ -9,15 +9,15 @@
         <thead>
           <tr>
             <th></th>
-            <th class="font-bold text-center md:text-left text-[11px] lg:text-sm bg-[#324321] text-white">Our Brand</th>
-            <th class="font-bold text-center md:text-left text-[11px] lg:text-sm text-black">Them</th>
-            <th class="font-bold text-center md:text-left text-[11px] lg:text-sm text-black">Them</th>
+            <th class="font-bold text-center text-[11px] lg:text-sm bg-[#324321] text-white">Our Brand</th>
+            <th class="font-bold text-center text-[11px] lg:text-sm text-black">Them</th>
+            <th class="font-bold text-center text-[11px] lg:text-sm text-black">Them</th>
           </tr>
         </thead>
         <tbody>
           {% for item in currentProduct.metafields.custom.product_comparison_section_info.value %}
             <tr>
-              <th class="text-xs md:text-sm capitalize text-left md:text-center">{{ item }}</th>
+              <th class="text-xs md:text-sm capitalize text-left">{{ item }}</th>
               <td class="text-center bg-[#324321] ">
                 <i class="fa fa-check-circle text-xl text-white font-bold" aria-hidden="true"></i>
               </td>
