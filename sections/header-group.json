@@ -17,13 +17,29 @@
         "heading_cB8Pnf": {
           "type": "heading",
           "settings": {
-            "heading_text": "jklklkl"
+            "heading_text": "Welcome to our Store"
+          }
+        },
+        "heading_EtqfFw": {
+          "type": "heading",
+          "settings": {
+            "heading_text": "Free Shipping Today!"
           }
         }
       },
       "block_order": [
-        "heading_cB8Pnf"
+        "heading_cB8Pnf",
+        "heading_EtqfFw"
       ],
+      "settings": {
+        "show_bar": true,
+        "show_arrows_bar": true,
+        "bg_color": "#8b4d14",
+        "text_color": "#ffffff"
+      }
+    },
+    "announcement_bar_RXWa4F": {
+      "type": "announcement-bar",
       "settings": {
         "show_bar": true,
         "show_arrows_bar": true,
@@ -39,6 +55,7 @@
   },
   "order": [
     "announcement_bar_ThHMDX",
+    "announcement_bar_RXWa4F",
     "header"
   ]
 }
