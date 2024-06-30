@@ -4,8 +4,8 @@
   }
 </style>
 <a href="{{ currentProduct.url }}">
-  <div class="card {% if autoWidth != blank %} w-full {% else %} md:w-96  {% endif %} bg-base-100 shadow">
-    <figure class="h-[340px] md:h-[400px] overflow-hidden">
+  <div class="card {% if autoWidth != blank %} w-full {% else %} md:w-96  {% endif %} bg-base-100 shadow overflow-hidden">
+    <figure class="h-[340px] md:h-[400px] ">
       <img
         src="{{ currentProduct.featured_image | image_url: width: 5000 }}"
         height="100%"
@@ -19,7 +19,7 @@
       <h2 class="card-title text-base capitalize">
         {{ currentProduct.title }}
       </h2>
-      <p class="text-xs leading-6 text-gray-700 mb-3 h-[100px]">
+      <p class="text-xs leading-6 text-gray-700 mb-3 h-[80px]">
         {% if currentProduct.metafields.custom.short_product_desc != blank %}
           {{ currentProduct.metafields.custom.short_product_desc | truncate: 150 }}
         {% else %}
