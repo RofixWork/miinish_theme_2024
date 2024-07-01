@@ -64,7 +64,7 @@
                 <img
                   src="{{ image | img_url: '100x100' }}"
                   alt="{{ image.alt | escape }}"
-                  class="w-20 h-20 object-cover">
+                  class="w-20 h-20 object-contain">
               </li>
             {% endfor %}
           </ul>
@@ -245,7 +245,7 @@
       
     var thumbnailCarousel = new Splide('#thumbnail-carousel', {
       fixedWidth  : 100,
-      fixedHeight : 70,
+      fixedHeight : 64,
       isNavigation: true,
       gap         : 10,
       focus       : 'center',
