@@ -1,6 +1,6 @@
 <div class="py-[30px] px-4 w-[95vw] lg:max-w-6xl mx-auto">
   {% if collection.products_count != 0 %}
-    <h3 class="text-xl uppercase font-semibold mb-3">{{ collection.title }} ({{ collection.products_count }})</h3>
+    <h3 class="text-xl uppercase font-semibold mb-3">All Products</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {% paginate collection.products by 10 %}
         {% for product in collection.products %}
