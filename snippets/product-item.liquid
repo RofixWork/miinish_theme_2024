@@ -6,7 +6,7 @@
 <div>
 <a href="{{ currentProduct.url }}">
   <div class="card {% if autoWidth != blank %} w-full {% else %} md:w-96  {% endif %} bg-base-100 shadow overflow-hidden">
-    <figure class="h-[340px] md:h-[380px]">
+    <figure class="h-[340px] md:h-[380px] overflow-hidden">
       <img
         src="{{ currentProduct.featured_image | image_url: width: 5000 }}"
         height="100%"
