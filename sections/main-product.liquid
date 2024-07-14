@@ -143,8 +143,8 @@
               </div>
             {% when "btn_buy" %}
               <div {{ block.shopify_attributes }} class="order-4 md:order-7 mt-2 space-y-2">{{ form | payment_button }}
-                <div class='flex justify-end'>
-                  <img src="{{ 'payment_2.png' | asset_url }}" />
+                <div class='flex justify-center w-[500px]'>
+                  <img src="{{ 'payment_2.png' | asset_url }}"  />
                 </div>
               </div>
             {% when "badges" %}
