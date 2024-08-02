@@ -301,11 +301,9 @@
                 }
                 else if(matchedVariant.compare_at_price >= matchedVariant.price)
                 {
-                    if (comparePrice.classList.contains("hidden"))
-                    {
-                        comparePrice.classList.remove("hidden");
-                    }
-                        productDiscountPercentage?.classList.remove("hidden")
+                    comparePrice.classList.remove("hidden");
+
+                    productDiscountPercentage?.classList.remove("hidden")
                     const discountPrice = matchedVariant.compare_at_price - matchedVariant.price;
                     const discountPercentage = (discountPrice / matchedVariant.compare_at_price) * 100;
       
