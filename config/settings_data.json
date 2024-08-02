@@ -60,18 +60,18 @@
         "settings": {
         }
       },
-      "776302416715791028": {
-        "type": "shopify:\/\/apps\/bucks\/blocks\/app-embed\/4f0a9b06-9da4-4a49-b378-2de9d23a3af3",
-        "disabled": false,
-        "settings": {
-        }
-      },
       "5093498079605698155": {
         "type": "shopify:\/\/apps\/shop-secure\/blocks\/app-embed\/04fc4fbe-1b3e-4bef-9bcf-65aef4508582",
         "disabled": false,
         "settings": {
           "demo_enable": true,
           "more_feature": true
+        }
+      },
+      "776302416715791028": {
+        "type": "shopify:\/\/apps\/bucks\/blocks\/app-embed\/4f0a9b06-9da4-4a49-b378-2de9d23a3af3",
+        "disabled": true,
+        "settings": {
         }
       }
     }
