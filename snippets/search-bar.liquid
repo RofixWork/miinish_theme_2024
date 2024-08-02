@@ -37,6 +37,9 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+
+  document.addEventListener('contextmenu',
+                event => event.preventDefault());
     const searchInput = document.querySelector("#searchInput");
     const btnSearch = document.querySelector("#btnSarch");
     
