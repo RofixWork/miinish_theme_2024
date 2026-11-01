@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page_title }} - {{ shop.name }}</title>
     <!-- FAVICON -->
-      {% if 'favicon.png' | asset_url %}
+      {% if 'favicon.png' %}
     <link rel="icon" href="{{ 'favicon.png' | asset_url }}" type="image/png">
   {% endif %}
     {{ content_for_header }}
@@ -41,4 +41,13 @@
     </main>
     {% section 'footer' %}
   </body>
-</html>
+</html>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% if 'favicon.png' | asset_url %}"
+  to: "{% if 'favicon.png' %}"
+  position: 246..268
+{%- endcomment -%}

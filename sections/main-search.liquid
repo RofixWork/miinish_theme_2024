@@ -13,13 +13,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {% for item in search.results %}
         {% if item.object_type == 'product' %}
-          {% render 'product-item'
-            ,
- {
- currentProduct: item
-            ,
- autoWidth: true
- } %}
+          {% render 'product-item', currentProduct: item, autoWidth: true %}
         {% endif %}
       {% endfor %}
 
@@ -31,4 +25,20 @@
     "name": "Main Search",
     "settings": []
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'product-item'
+                ,
+     {
+     currentProduct: item
+                ,
+     autoWidth: true
+     } %}
+  to: "{% render 'product-item', currentProduct: item, autoWidth: true %}"
+  position: 985..1051
+{%- endcomment -%}

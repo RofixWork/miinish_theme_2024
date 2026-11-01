@@ -157,13 +157,7 @@
                 <div class="space-y-3 order-7 md:order-9 w-full lg:w-[500px]" {{ block.shopify_attributes }}>
                   <h3 class="divider text-xl md:text-2xl font-semibold mb-[30px] ">FAQs</h3>
                   {% for item in variable %}
-                    {% render 'faqs'
-                      , {
- question: item.question
-                      ,
- answer: item.answer
-
- } %}
+                    {% render 'faqs', question: item.question, answer: item.answer %}
                   {% endfor %}
 
                 </div>
@@ -396,4 +390,20 @@
       ],
       "settings": []
     }
-  {% endschema %}
+  {% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'faqs'
+                          , {
+     question: item.question
+                          ,
+     answer: item.answer
+
+     } %}
+  to: "{% render 'faqs', question: item.question, answer: item.answer %}"
+  position: 6329..6394
+{%- endcomment -%}
